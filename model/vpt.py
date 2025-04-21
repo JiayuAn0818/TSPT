@@ -445,10 +445,7 @@ class CIL_ViT(VisionTransformer):
         if task_id==-1:
             w[-args.init_classes:] = torch.nn.functional.normalize(w[-args.init_classes:], dim=1, p=2)
         else:
-            if 'imbalance' in args.log_name:
-                w[-args.per_stage_classes[task_id]:] = torch.nn.functional.normalize(w[-args.per_stage_classes[task_id]:], dim=1, p=2)
-            else:
-                w[-args.per_stage_classes:] = torch.nn.functional.normalize(w[-args.per_stage_classes:], dim=1, p=2)
+            w[-args.per_stage_classes:] = torch.nn.functional.normalize(w[-args.per_stage_classes:], dim=1, p=2)
         # w = torch.nn.functional.normalize(w, dim=1, p=2)
         self.head.weight.data = w.clone()
 
